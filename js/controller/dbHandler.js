@@ -5,12 +5,12 @@ var Promise = require('Promise');
 var logobj = require('../../log/logConfig');
 const LOGGER = logobj.getLogger('appLog');
 
-exports.findByGender = (req,res) =>{
-    LOGGER.trace(`finding into table based on gender::  ${req.query.gender}`);
+exports.findByGender = (gender) =>{
+    LOGGER.trace(`finding into table based on gender::  ${gender}`);
     return new Promise((resolve,reject)=>{
-        Person.find({'gender': req.query.gender},(err,docs)=>{
+        Person.find({'gender': gender},(err,docs)=>{
             if(err) LOGGER.trace(`${err}`);
-            else {
+            else { 
                 LOGGER.trace(`fetched Successfully`);
                 resolve(docs);
             }
@@ -33,10 +33,10 @@ exports.insertWithData = (req,res) => {
     });
 };
 
-exports.findBYElement = (req,res) => {
-    LOGGER.trace(`finding into table based on ::  ${req.query.paramter}`);
+exports.findBYElementId = (querId) => {
+    LOGGER.trace(`finding into table based on id:: ${querId}`);
     return new Promise((resolve,reject)=>{
-        Person.find({'gender': req.query.gender},(err,docs)=>{
+        Person.find({'id': querId},(err,docs)=>{
             if(err) LOGGER.trace(`${err}`);
             else {
                 LOGGER.trace(`fetched Successfully`);

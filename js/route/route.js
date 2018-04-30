@@ -1,14 +1,23 @@
 'use strict';
 var controller = require('../controller/dbHandler');
+var prettyjson = require('prettyjson');
 
 module.exports = function(router){
 
     router.get('/',(req,res,next) => {
-        var promise = controller.findByGender(req);
+        let queryId = req.query.id || null;
+        let gender = req.query.gender || null;
+        var promise;
+        if(gender != null){
+            promise = controller.findByGender(gender);
+        }
+        else if(querId != null){
+            promise = controller.findBYElementId(queryId);
+        }
         promise.then((data)=>{
-           console.log(data);
+            data = JSON.stringify(data, null, 2);
+            res.json(`${data}`);
         });
-        res.json({"message":"found it"});
     });
 
     router.post('/save',(req,res,next) => {
