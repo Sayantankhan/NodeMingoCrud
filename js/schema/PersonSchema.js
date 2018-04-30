@@ -4,13 +4,13 @@ var mongoose = require('mongoose'),
 //create a schema
 var personSchema = new Schema({
     id : { type: Number, required: true, unique: true },
-    first_name : { type: String, required: true, unique: true },
-    last_name : { type: String, required: true, unique: true },
+    first_name : { type: String, required: true},
+    last_name : { type: String, required: true},
     email : String,
     gender : String,
     company : String,
     stock : String
-});
+},{collection: 'person'});
 
 var Person = mongoose.model('Person',personSchema);
 
