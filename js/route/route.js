@@ -22,7 +22,7 @@ module.exports = function(router){
     router.post('/save',(req,res,next) => {
         var promise = controller.insertWithData(req);
         promise.then((data)=>{
-            res.json({'status':data});
+            res.json({'status':`${data}`});
         })
     });
 
@@ -30,8 +30,15 @@ module.exports = function(router){
 	router.use(function(req, res, next) {
 		const err = new Error('Not Found');
 		err.status = 404;
-    logger.error('404 error not found');
+        logger.error('404 error not found');
 		next(err);
-	});
+    });
+    
+    router.use(function(req, res, next) {
+        logger.trace(req.method, req.url);
+        // continue doing what we were doing and go to the route
+        next();
+    });
+
     return router;
 }

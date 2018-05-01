@@ -17,7 +17,7 @@ require('promise/lib/rejection-tracking').enable(
 );
 // log only 4xx and 5xx responses to console
 app.use(morgan('dev', {
-    skip: function (req, res) { return res.statusCode > 400 }
+    skip: function (req, res) { return res.statusCode < 400 }
 }));
 
 // log all requests to access.log
@@ -33,6 +33,8 @@ app.use(helmet({
 }));
 
 app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+
 mongoose.connect(config.DBHost,(err) => {
     if (err) return console.log(err);
 });

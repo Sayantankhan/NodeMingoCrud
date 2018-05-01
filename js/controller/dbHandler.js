@@ -21,7 +21,6 @@ exports.findByGender = (gender) =>{
 exports.insertWithData = (req,res) => {
     LOGGER.trace(`inserting the data into table  ${req.body}`);
     var person = new Person(req.body);
-
     return new Promise((resolve,reject)=>{
         person.save(function(err) {
             if (err) LOGGER.error(`error in inserting into table :: ${req.body.first_name} ${req.body.email}`);
