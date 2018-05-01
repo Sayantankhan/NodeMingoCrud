@@ -11,11 +11,10 @@ module.exports = function(router){
         if(gender != null){
             promise = controller.findByGender(gender);
         }
-        else if(querId != null){
+        else if(queryId != null){
             promise = controller.findBYElementId(queryId);
         }
         promise.then((data)=>{
-            data = JSON.stringify(data, null, 2);
             res.json(`${data}`);
         });
     });
@@ -23,7 +22,7 @@ module.exports = function(router){
     router.post('/save',(req,res,next) => {
         var promise = controller.insertWithData(req);
         promise.then((data)=>{
-            res.Json({'status':data});
+            res.json({'status':data});
         })
     });
 
