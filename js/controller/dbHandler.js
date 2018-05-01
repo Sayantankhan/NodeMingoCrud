@@ -44,3 +44,20 @@ exports.findBYElementId = (querId) => {
         });
     });
 };
+
+exports.updateElementById = (queryId,updatedObj) => {
+    LOGGER.trace(`updating into table based on ::  ${queryId}`);
+    let person = new Person(updatedObj);
+    return new Promise((resolve,reject) => {
+        Person.update({'id': queryId},updatedObj,null,(err) =>{
+            if(err) {
+                LOGGER.error(`error in updating into table :: ${updatedObj}`);
+                resolve('not updated');
+            }
+            else{
+                LOGGER.trace(`updated Successfully`);
+                resolve('updated');
+            }
+        });
+    });
+};

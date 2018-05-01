@@ -6,4 +6,4 @@ logger.configure({
     categories: { default: { appenders: ['appLog'], level: 'trace', pattern: "[%r][%.1p] %c - %m" } }
   });
   
-  module.exports = logger;
+module.exports = logger;

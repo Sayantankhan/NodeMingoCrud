@@ -26,6 +26,13 @@ module.exports = function(router){
         })
     });
 
+    router.post('/update',(req,res)=>{
+        var promise = controller.updateElementById(req.body.id,req.body);
+        promise.then((data) => {
+            res.json({'status':`${data}`});
+        });
+    });
+
     // catch 404 and forward to error handler
 	router.use(function(req, res, next) {
 		const err = new Error('Not Found');
@@ -34,6 +41,7 @@ module.exports = function(router){
 		next(err);
     });
     
+    //middle-ware
     router.use(function(req, res, next) {
         logger.trace(req.method, req.url);
         // continue doing what we were doing and go to the route
